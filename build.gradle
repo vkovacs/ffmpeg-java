@@ -11,8 +11,6 @@ repositories {
 
 dependencies {
     implementation 'org.bytedeco:javacv-platform:1.5.10'
-    implementation 'org.bytedeco:opencv-platform-gpu:4.9.0-1.5.10'
-    implementation 'org.bytedeco:ffmpeg-platform-gpl:6.1.1-1.5.10'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
