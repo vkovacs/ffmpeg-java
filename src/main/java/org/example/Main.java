@@ -15,17 +15,16 @@ public class Main {
 
         try (VideoCapture capture = new VideoCapture("C:\\TMP\\video\\sample_video_roof.mp4")) {
             int i = 0;
-            var hasNextFrame = capture.read(frame);
-            while (hasNextFrame) {
+
+            boolean hasNextFrame;
+            do {
+                hasNextFrame = capture.read(frame);
                 if (!frame.empty()) {
                     imwrite("C:\\TMP\\video\\cover-%s.jpg".formatted(String.format("%04d", i)), frame);
                 }
+                i++;
 
-                hasNextFrame = capture.read(frame);
-            }
-            if (!frame.empty()) {
-                imwrite("C:\\TMP\\video\\cover-%s.jpg".formatted(String.format("%04d", i)), frame);
-            }
+            } while (hasNextFrame);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
