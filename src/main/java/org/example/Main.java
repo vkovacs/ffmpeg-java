@@ -13,14 +13,21 @@ public class Main {
 
         Mat frame = new Mat(height, width, CV_8UC1);
 
-        VideoCapture capture = new VideoCapture("C:\\TMP\\video\\sample_video_roof.mp4");
+        try (VideoCapture capture = new VideoCapture("C:\\TMP\\video\\sample_video_roof.mp4")) {
+            int i = 0;
+            var hasNextFrame = capture.read(frame);
+            while (hasNextFrame) {
+                if (!frame.empty()) {
+                    imwrite("C:\\TMP\\video\\cover-%s.jpg".formatted(String.format("%04d", i)), frame);
+                }
 
-        if (capture.isOpened()) {
-            capture.read(frame);
-        }
-
-        if (frame != null) {
-            imwrite("C:\\TMP\\video\\cover.jpg", frame);
+                hasNextFrame = capture.read(frame);
+            }
+            if (!frame.empty()) {
+                imwrite("C:\\TMP\\video\\cover-%s.jpg".formatted(String.format("%04d", i)), frame);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
