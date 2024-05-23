@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    javacppPlatform = 'linux-x86,linux-x86_64,windows-x86_64' //https://stackoverflow.com/a/76925273/1141880 //FIXME: excluding unnecessary platforms make tests fail with NoClassDefFound error.
+}
+
 dependencies {
     implementation 'org.bytedeco:javacv-platform:1.5.10'
 
